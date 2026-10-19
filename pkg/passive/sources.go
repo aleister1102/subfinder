@@ -13,6 +13,7 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/alienvault"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/anubis"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/arquivopt"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/bevigil"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/bufferover"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/builtwith"
@@ -22,6 +23,7 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/chaos"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/chinaz"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/commoncrawl"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/crtlive"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/crtname"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/crtsh"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/digitalyama"
@@ -43,6 +45,7 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/onyphe"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/profundis"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/pugrecon"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/pulsedive"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/quake"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rapiddns"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/reconeer"
@@ -54,6 +57,7 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/shodan"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/shodanct"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/sitedossier"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/subdomainapp"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/subdomaincenter"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/submd"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/thc"
@@ -70,10 +74,11 @@ import (
 
 var AllSources = newSources()
 
-func newSources() [54]subscraping.Source {
+func newSources() [58]subscraping.Source {
 	return [...]subscraping.Source{
 		&alienvault.Source{},
 		&anubis.Source{},
+		&arquivopt.Source{},
 		&bevigil.Source{},
 		&bufferover.Source{},
 		&builtwith.Source{},
@@ -83,6 +88,7 @@ func newSources() [54]subscraping.Source {
 		&chaos.Source{},
 		&chinaz.Source{},
 		&commoncrawl.Source{},
+		&crtlive.Source{},
 		&crtname.Source{},
 		&crtsh.Source{},
 		&digitalyama.Source{},
@@ -104,6 +110,7 @@ func newSources() [54]subscraping.Source {
 		&onyphe.Source{},
 		&profundis.Source{},
 		&pugrecon.Source{},
+		&pulsedive.Source{},
 		&quake.Source{},
 		&rapiddns.Source{},
 		// &reconcloud.Source{}, // failing due to cloudflare bot protection
@@ -117,6 +124,7 @@ func newSources() [54]subscraping.Source {
 		&shodan.Source{},
 		&shodanct.Source{},
 		&sitedossier.Source{},
+		&subdomainapp.Source{},
 		&subdomaincenter.Source{},
 		&thc.Source{},
 		&threatbook.Source{},
