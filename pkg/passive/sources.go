@@ -47,7 +47,6 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/quake"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rapiddns"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/reconeer"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/redhuntlabs"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/robtex"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rsecloud"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/scanmalware"
@@ -72,7 +71,7 @@ import (
 
 var AllSources = newSources()
 
-func newSources() [56]subscraping.Source {
+func newSources() [55]subscraping.Source {
 	return [...]subscraping.Source{
 		&alienvault.Source{},
 		&anubis.Source{},
@@ -111,7 +110,6 @@ func newSources() [56]subscraping.Source {
 		&rapiddns.Source{},
 		// &reconcloud.Source{}, // failing due to cloudflare bot protection
 		&reconeer.Source{},
-		&redhuntlabs.Source{},
 		// &riddler.Source{}, // failing due to cloudfront protection
 		&robtex.Source{},
 		&rsecloud.Source{},

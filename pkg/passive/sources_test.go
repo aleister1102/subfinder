@@ -38,7 +38,6 @@ var (
 		"quake",
 		"pugrecon",
 		"rapiddns",
-		"redhuntlabs",
 		// "riddler", // failing due to cloudfront protection
 		"robtex",
 		"rsecloud",
@@ -90,7 +89,6 @@ var (
 		"intelx",
 		"onyphe",
 		"quake",
-		"redhuntlabs",
 		"robtex",
 		// "riddler", // failing due to cloudfront protection
 		"rsecloud",

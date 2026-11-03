@@ -49,7 +49,6 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rapiddns"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/reconcloud"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/reconeer"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/redhuntlabs"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/riddler"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/robtex"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rsecloud"
@@ -391,9 +390,6 @@ func awaitRequest(t *testing.T, ctx context.Context, entered <-chan struct{}) {
 }
 
 func concurrencyKeys(name string) []string {
-	if name == "redhuntlabs" {
-		return []string{"https://mock.example:test-key"}
-	}
 	// A valid pair also works as an opaque token for sources that do not split keys.
 	return []string{"mock.example:test-key"}
 }
@@ -448,7 +444,6 @@ func concurrencySources() []subscraping.Source {
 		&rapiddns.Source{},
 		&reconcloud.Source{},
 		&reconeer.Source{},
-		&redhuntlabs.Source{},
 		&riddler.Source{},
 		&robtex.Source{},
 		&rsecloud.Source{},
