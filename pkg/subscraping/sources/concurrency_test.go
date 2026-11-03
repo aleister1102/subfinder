@@ -18,7 +18,6 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/alienvault"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/anubis"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/bevigil"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/bufferover"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/builtwith"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/c99"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/censys"
@@ -159,7 +158,6 @@ func TestSourceConcurrentResults(t *testing.T) {
 		limited  bool
 	}{
 		{&anubis.Source{}, `["one.example.com","two.example.com","three.example.com"]`, 1, false},
-		{&bufferover.Source{}, `{"Results":["one.example.com","two.example.com","three.example.com"]}`, 1, false},
 		{&censys.Source{}, `{"result":{"hits":[{"certificate_v1":{"resource":{"names":["one.example.com","two.example.com","three.example.com"]}}}]}}`, 1, true},
 		{&crtname.Source{}, "one.example.com\ntwo.example.com\nthree.example.com\n", 1, true},
 		{&driftnet.Source{}, `{"summary":{"values":{"one.example.com":1,"two.example.com":1,"three.example.com":1}}}`, 4, false},
@@ -420,7 +418,6 @@ func concurrencySources() []subscraping.Source {
 		&alienvault.Source{},
 		&anubis.Source{},
 		&bevigil.Source{},
-		&bufferover.Source{},
 		&builtwith.Source{},
 		&c99.Source{},
 		&censys.Source{},

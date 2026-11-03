@@ -15,7 +15,6 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/anubis"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/arquivopt"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/bevigil"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/bufferover"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/builtwith"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/c99"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/censys"
@@ -74,13 +73,12 @@ import (
 
 var AllSources = newSources()
 
-func newSources() [58]subscraping.Source {
+func newSources() [57]subscraping.Source {
 	return [...]subscraping.Source{
 		&alienvault.Source{},
 		&anubis.Source{},
 		&arquivopt.Source{},
 		&bevigil.Source{},
-		&bufferover.Source{},
 		&builtwith.Source{},
 		&c99.Source{},
 		&censys.Source{},
