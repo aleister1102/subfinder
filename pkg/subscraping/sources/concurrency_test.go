@@ -57,7 +57,6 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/subdomaincenter"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/thc"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/threatbook"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/threatminer"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/urlscan"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/virustotal"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/waybackarchive"
@@ -446,7 +445,6 @@ func concurrencySources() []subscraping.Source {
 		&subdomaincenter.Source{},
 		&thc.Source{},
 		&threatbook.Source{},
-		&threatminer.Source{},
 		&urlscan.Source{},
 		&virustotal.Source{},
 		&waybackarchive.Source{},

@@ -116,7 +116,6 @@ func newSources() [52]subscraping.Source {
 		&subdomaincenter.Source{},
 		&thc.Source{},
 		&threatbook.Source{},
-		// &threatminer.Source{}, // failing  api
 		&urlscan.Source{},
 		&virustotal.Source{},
 		&waybackarchive.Source{},
