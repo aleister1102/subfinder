@@ -48,7 +48,6 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/quake"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rapiddns"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/reconeer"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/riddler"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rsecloud"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/scanmalware"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/securitytrails"
@@ -438,7 +437,6 @@ func concurrencySources() []subscraping.Source {
 		&quake.Source{},
 		&rapiddns.Source{},
 		&reconeer.Source{},
-		&riddler.Source{},
 		&rsecloud.Source{},
 		&scanmalware.Source{},
 		&securitytrails.Source{},
