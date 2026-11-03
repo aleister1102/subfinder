@@ -9,6 +9,7 @@ import (
 	"net"
 	"net/http"
 	"net/url"
+	"sync"
 	"time"
 
 	"github.com/corpix/uarand"
@@ -187,4 +188,46 @@ func httpRequestWrapper(client *http.Client, request *http.Request, maxResponseB
 		return response, fmt.Errorf("unexpected status code %d received from %s", response.StatusCode, requestURL)
 	}
 	return response, nil
+}
+
+// preflightTimeout limits the homepage probe that detects connection-level
+// blocks before a source spends a full request on its real endpoint.
+const preflightTimeout = 3 * time.Second
+
+// preflightCache stores probe verdicts by URL for the process lifetime, so a
+// blocked source is probed once across all domains of a -dL run.
+var preflightCache sync.Map // probeURL -> error (nil means reachable)
+
+// Preflight probes probeURL (a source homepage, so it costs no API quota)
+// and returns an error if the host does not answer within preflightTimeout.
+// The verdict is cached per probeURL, except when the caller's context ended.
+func (s *Session) Preflight(ctx context.Context, probeURL string) error {
+	if v, ok := preflightCache.Load(probeURL); ok {
+		if v == nil {
+			return nil
+		}
+		return v.(error)
+	}
+	err := s.probe(ctx, probeURL)
+	if ctx.Err() == nil {
+		preflightCache.Store(probeURL, err)
+	}
+	return err
+}
+
+func (s *Session) probe(ctx context.Context, probeURL string) error {
+	ctx, cancel := context.WithTimeout(ctx, preflightTimeout)
+	defer cancel()
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, probeURL, nil)
+	if err != nil {
+		return err
+	}
+	req.Header.Set("User-Agent", uarand.GetRandom())
+	client := &http.Client{Timeout: preflightTimeout, Transport: s.Client.Transport}
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	_, _ = io.Copy(io.Discard, resp.Body)
+	return resp.Body.Close()
 }
