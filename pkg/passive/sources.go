@@ -105,7 +105,6 @@ func newSources() [52]subscraping.Source {
 		&pulsedive.Source{},
 		&quake.Source{},
 		&rapiddns.Source{},
-		// &reconcloud.Source{}, // failing due to cloudflare bot protection
 		&reconeer.Source{},
 		// &riddler.Source{}, // failing due to cloudfront protection
 		&rsecloud.Source{},
