@@ -39,7 +39,6 @@ var (
 		"pugrecon",
 		"rapiddns",
 		// "riddler", // failing due to cloudfront protection
-		"robtex",
 		"rsecloud",
 		"scanmalware",
 		"securitytrails",
@@ -89,7 +88,6 @@ var (
 		"intelx",
 		"onyphe",
 		"quake",
-		"robtex",
 		// "riddler", // failing due to cloudfront protection
 		"rsecloud",
 		"scanmalware",
