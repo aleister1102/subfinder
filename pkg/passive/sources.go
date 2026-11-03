@@ -30,7 +30,6 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/dnsdb"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/dnsdumpster"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/dnsrepo"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/domainsproject"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/driftnet"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/fofa"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/fullhunt"
@@ -73,7 +72,7 @@ import (
 
 var AllSources = newSources()
 
-func newSources() [57]subscraping.Source {
+func newSources() [56]subscraping.Source {
 	return [...]subscraping.Source{
 		&alienvault.Source{},
 		&anubis.Source{},
@@ -94,7 +93,6 @@ func newSources() [57]subscraping.Source {
 		&dnsdb.Source{},
 		&dnsdumpster.Source{},
 		&dnsrepo.Source{},
-		&domainsproject.Source{},
 		&driftnet.Source{},
 		&fofa.Source{},
 		&fullhunt.Source{},
