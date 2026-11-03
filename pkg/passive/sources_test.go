@@ -62,7 +62,6 @@ var (
 		"merklemap",
 		"thc",
 		"urlscan",
-		"submd",
 		"subdomaincenter",
 	}
 
@@ -104,7 +103,6 @@ var (
 		"builtwith",
 		"digitalyama",
 		"urlscan",
-		"submd",
 		"subdomaincenter",
 	}
 
