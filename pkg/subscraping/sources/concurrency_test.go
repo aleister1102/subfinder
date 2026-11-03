@@ -38,7 +38,6 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/fofa"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/fullhunt"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/github"
-	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/gitlab"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/hackertarget"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/hudsonrock"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/intelx"
@@ -211,7 +210,7 @@ func TestSourceConcurrentResults(t *testing.T) {
 
 // Worker counters belong to one run, and worker errors must not prevent completion.
 func TestSourceConcurrentWorkers(t *testing.T) {
-	for _, source := range []subscraping.Source{&github.Source{}, &gitlab.Source{}} {
+	for _, source := range []subscraping.Source{&github.Source{}} {
 		t.Run(source.Name(), func(t *testing.T) {
 			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancel()
@@ -441,7 +440,6 @@ func concurrencySources() []subscraping.Source {
 		&fofa.Source{},
 		&fullhunt.Source{},
 		&github.Source{},
-		&gitlab.Source{},
 		&hackertarget.Source{},
 		&hudsonrock.Source{},
 		&intelx.Source{},

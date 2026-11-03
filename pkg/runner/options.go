@@ -302,7 +302,6 @@ var defaultRateLimits = []string{
 	"securitytrails=2/s",
 	"sitedossier=8/m",
 	"netlas=1/s",
-	// "gitlab=2/s",
 	"github=83/m",
 	"hudsonrock=5/s",
 	"urlscan=1/s",
