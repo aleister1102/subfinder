@@ -20,12 +20,6 @@ type CustomRateLimit struct {
 	CustomDuration mapsutil.SyncLockMap[string, time.Duration]
 }
 
-// BasicAuth request's Authorization header
-type BasicAuth struct {
-	Username string
-	Password string
-}
-
 // Statistics contains statistics about the scraping process
 type Statistics struct {
 	TimeTaken time.Duration
