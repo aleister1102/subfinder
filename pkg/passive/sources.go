@@ -63,7 +63,6 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/whoisxmlapi"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/windvane"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/zoomeyeapi"
-	mapsutil "github.com/projectdiscovery/utils/maps"
 )
 
 var AllSources = newSources()
@@ -124,9 +123,6 @@ func newSources() [52]subscraping.Source {
 		&zoomeyeapi.Source{},
 	}
 }
-
-var sourceWarnings = mapsutil.NewSyncLockMap[string, string](
-	mapsutil.WithMap(mapsutil.Map[string, string]{}))
 
 var NameSourceMap = make(map[string]subscraping.Source, len(AllSources))
 
@@ -284,12 +280,6 @@ func selectSources(available []subscraping.Source, byName map[string]subscraping
 	}
 
 	gologger.Debug().Msgf("Selected source(s) for this search: %s", strings.Join(slices.Sorted(maps.Keys(sources)), ", "))
-
-	for _, currentSource := range sources {
-		if warning, ok := sourceWarnings.Get(strings.ToLower(currentSource.Name())); ok {
-			gologger.Warning().Msg(warning)
-		}
-	}
 
 	// Create the agent, insert the sources and remove the excluded sources
 	agent := &Agent{sources: slices.Collect(maps.Values(sources))}
