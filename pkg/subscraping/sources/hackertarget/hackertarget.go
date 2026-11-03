@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	"slices"
+	"strings"
 	"sync"
 	"time"
 
@@ -35,6 +36,13 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 			s.mu.Unlock()
 			close(results)
 		}(time.Now())
+
+		// Bail out fast when the host is blocked or unreachable.
+		if err := session.Preflight(ctx, "https://hackertarget.com/"); err != nil {
+			results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: fmt.Errorf("hackertarget preflight failed (blocked/unreachable): %w", err)}
+			stats.Errors++
+			return
+		}
 
 		htSearchUrl := fmt.Sprintf("https://api.hackertarget.com/hostsearch/?q=%s", domain)
 		randomApiKey := subscraping.PickRandom(apiKeys, s.Name())
@@ -69,6 +77,12 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 			if line == "" {
 				continue
 			}
+			// A plaintext quota or error line comes back with HTTP 200.
+			if isQuotaError(line) {
+				results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: fmt.Errorf("hackertarget blocked: %s", line)}
+				stats.Errors++
+				return
+			}
 			match := session.Extractor.Extract(line)
 			for _, subdomain := range match {
 				select {
@@ -82,6 +96,12 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 	}()
 
 	return results
+}
+
+// isQuotaError reports whether a response line is a plaintext error that
+// hackertarget returns with HTTP 200 when the quota is used up.
+func isQuotaError(line string) bool {
+	return strings.Contains(line, "API count exceeded") || strings.HasPrefix(line, "error ")
 }
 
 // Name returns the name of the source
