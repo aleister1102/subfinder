@@ -11,6 +11,7 @@ import (
 
 	"github.com/projectdiscovery/gologger"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/agniops"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/alienvault"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/anubis"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/arquivopt"
@@ -22,6 +23,7 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/chaos"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/chinaz"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/commoncrawl"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/criminalip"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/crtlive"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/crtname"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/crtsh"
@@ -36,22 +38,27 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/github"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/hackertarget"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/hudsonrock"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/hunterhow"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/intelx"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/leakix"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/merklemap"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/myssl"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/netlas"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/onyphe"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/profundis"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/pugrecon"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/pulsedive"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/quake"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/racent"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rapiddns"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/reconeer"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/reverseipdomain"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/rsecloud"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/scanmalware"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/securitytrails"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/shodan"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/shodanct"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/shodanx"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/sitedossier"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/subdomainapp"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/subdomaincenter"
@@ -60,6 +67,7 @@ import (
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/urlscan"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/virustotal"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/waybackarchive"
+	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/whoisfreaks"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/whoisxmlapi"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/windvane"
 	"github.com/projectdiscovery/subfinder/v2/pkg/subscraping/sources/zoomeyeapi"
@@ -67,8 +75,9 @@ import (
 
 var AllSources = newSources()
 
-func newSources() [52]subscraping.Source {
+func newSources() [60]subscraping.Source {
 	return [...]subscraping.Source{
+		&agniops.Source{},
 		&alienvault.Source{},
 		&anubis.Source{},
 		&arquivopt.Source{},
@@ -80,6 +89,7 @@ func newSources() [52]subscraping.Source {
 		&chaos.Source{},
 		&chinaz.Source{},
 		&commoncrawl.Source{},
+		&criminalip.Source{},
 		&crtlive.Source{},
 		&crtname.Source{},
 		&crtsh.Source{},
@@ -94,22 +104,27 @@ func newSources() [52]subscraping.Source {
 		&github.Source{},
 		&hackertarget.Source{},
 		&hudsonrock.Source{},
+		&hunterhow.Source{},
 		&intelx.Source{},
 		&leakix.Source{},
 		&merklemap.Source{},
+		&myssl.Source{},
 		&netlas.Source{},
 		&onyphe.Source{},
 		&profundis.Source{},
 		&pugrecon.Source{},
 		&pulsedive.Source{},
 		&quake.Source{},
+		&racent.Source{},
 		&rapiddns.Source{},
 		&reconeer.Source{},
+		&reverseipdomain.Source{},
 		&rsecloud.Source{},
 		&scanmalware.Source{},
 		&securitytrails.Source{},
 		&shodan.Source{},
 		&shodanct.Source{},
+		&shodanx.Source{},
 		&sitedossier.Source{},
 		&subdomainapp.Source{},
 		&subdomaincenter.Source{},
@@ -118,6 +133,7 @@ func newSources() [52]subscraping.Source {
 		&urlscan.Source{},
 		&virustotal.Source{},
 		&waybackarchive.Source{},
+		&whoisfreaks.Source{},
 		&whoisxmlapi.Source{},
 		&windvane.Source{},
 		&zoomeyeapi.Source{},
@@ -126,8 +142,10 @@ func newSources() [52]subscraping.Source {
 
 var NameSourceMap = make(map[string]subscraping.Source, len(AllSources))
 
-var builtinSources = make(map[string]subscraping.Source, len(AllSources))
-var customSourceGates sync.Map
+var (
+	builtinSources    = make(map[string]subscraping.Source, len(AllSources))
+	customSourceGates sync.Map
+)
 
 func init() {
 	for _, currentSource := range AllSources {
