@@ -34,7 +34,7 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 		}(time.Now())
 
 		stats.Requests++
-		resp, err := session.SimpleGet(ctx, fmt.Sprintf("https://anubisdb.com/anubis/subdomains/%s", domain))
+		resp, err := session.SimpleGet(ctx, fmt.Sprintf("https://anubisdb.com/subdomains/%s", domain))
 		if err != nil {
 			results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 			stats.Errors++
