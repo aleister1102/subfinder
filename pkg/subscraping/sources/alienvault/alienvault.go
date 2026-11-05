@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"slices"
 	"sync"
 	"time"
@@ -44,15 +45,26 @@ func (s *Source) Run(ctx context.Context, domain string, session *subscraping.Se
 			close(results)
 		}(time.Now())
 
-		randomApiKey := subscraping.PickRandom(apiKeys, s.Name())
-		if randomApiKey == "" {
-			stats.Skipped = true
-			return
-		}
+		const maxAttempts = 2
+		endpoint := fmt.Sprintf("https://otx.alienvault.com/api/v1/indicators/domain/%s/passive_dns", domain)
 
-		stats.Requests++
-		resp, err := session.Get(ctx, fmt.Sprintf("https://otx.alienvault.com/api/v1/indicators/domain/%s/passive_dns", domain), "",
-			map[string]string{"Authorization": "Bearer " + randomApiKey})
+		var (
+			resp *http.Response
+			err  error
+		)
+		for attempt := 0; attempt < maxAttempts; attempt++ {
+			randomApiKey := subscraping.PickRandom(apiKeys, s.Name())
+			if randomApiKey == "" {
+				stats.Skipped = true
+				return
+			}
+
+			stats.Requests++
+			resp, err = session.Get(ctx, endpoint, "", map[string]string{"Authorization": "Bearer " + randomApiKey})
+			if err == nil || resp != nil || ctx.Err() != nil {
+				break
+			}
+		}
 		if err != nil && resp == nil {
 			results <- subscraping.Result{Source: s.Name(), Type: subscraping.Error, Error: err}
 			stats.Errors++
